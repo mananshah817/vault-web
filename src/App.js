@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Banks from "./pages/Banks";
 import Cards from "./pages/Cards";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
