@@ -13,7 +13,9 @@ export default function Banks() {
     }).then(r => r.json()).then(setBanks);
   };
 
-  useEffect(load, []);
+  useEffect(() => {
+  if (token) load();
+}, [token]);
 
   const submit = async () => {
     await fetch(`${API_URL}/api/bank`, {

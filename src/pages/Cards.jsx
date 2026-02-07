@@ -13,7 +13,10 @@ export default function Cards() {
     }).then(r => r.json()).then(setCards);
   };
 
-  useEffect(load, []);
+  useEffect(() => {
+  if (token) load();
+}, [token]);
+
 
   const submit = async () => {
     await fetch(`${API_URL}/api/card`, {

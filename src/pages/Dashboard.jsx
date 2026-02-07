@@ -5,13 +5,16 @@ export default function Dashboard() {
   const [banks, setBanks] = useState([]);
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    fetch(`${API_URL}/api/bank`, {
-      headers: { Authorization: "Bearer " + token }
-    })
-      .then(r => r.json())
-      .then(setBanks);
-  }, []);
+useEffect(() => {
+  if (!token) return;
+  fetch(`${API_URL}/api/bank`, {
+    headers: { Authorization: "Bearer " + token }
+  })
+    .then(r => r.json())
+    .then(setBanks);
+}, [token]);
+
+
 
   return (
     <div>
