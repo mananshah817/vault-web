@@ -13,12 +13,11 @@ export default function Login() {
     e.preventDefault();
     setError("");
     const res = await login(email, password);
-
     if (res?.token) {
       localStorage.setItem("token", res.token);
       nav("/dashboard");
     } else {
-      setError(typeof res === "string" ? res : "Invalid credentials");
+      setError("Invalid email or password");
     }
   };
 
@@ -29,37 +28,14 @@ export default function Login() {
           <Card className="shadow">
             <Card.Body>
               <h4 className="mb-3 text-center">Login</h4>
-
               {error && <Alert variant="danger">{error}</Alert>}
-
               <Form onSubmit={submit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-
-                <Button type="submit" className="w-100">
-                  Login
-                </Button>
+                <Form.Control className="mb-3" type="email" placeholder="Email" value={email}
+                  onChange={e => setEmail(e.target.value)} required />
+                <Form.Control className="mb-3" type="password" placeholder="Password" value={password}
+                  onChange={e => setPassword(e.target.value)} required />
+                <Button type="submit" className="w-100">Login</Button>
               </Form>
-
               <div className="text-center mt-3">
                 New user? <Link to="/register">Register</Link>
               </div>

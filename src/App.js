@@ -14,14 +14,23 @@ export default function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-<Route path="/dashboard" element={
-  <ProtectedRoute>
-    <Layout><Dashboard /></Layout>
-  </ProtectedRoute>
-} />
-    
-        <Route path="/banks" element={<Layout><Banks /></Layout>} />
-        <Route path="/cards" element={<Layout><Cards /></Layout>} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Layout><Dashboard /></Layout>
+          </ProtectedRoute>
+        } />
+
+        <Route path="/banks" element={
+          <ProtectedRoute>
+            <Layout><Banks /></Layout>
+          </ProtectedRoute>
+        } />
+
+        <Route path="/cards" element={
+          <ProtectedRoute>
+            <Layout><Cards /></Layout>
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   );

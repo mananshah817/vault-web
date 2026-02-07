@@ -7,16 +7,15 @@ export default function Cards() {
   const [form, setForm] = useState({ holderName: "", cardType: "", last4: "", expMonth: "", expYear: "" });
   const token = localStorage.getItem("token");
 
-  const load = () => {
+  useEffect(() => {
+    if (!token) return;
+
     fetch(`${API_URL}/api/card`, {
       headers: { Authorization: "Bearer " + token }
-    }).then(r => r.json()).then(setCards);
-  };
-
-  useEffect(() => {
-  if (token) load();
-}, [token]);
-
+    })
+      .then(r => r.json())
+      .then(setCards);
+  }, [token]);
 
   const submit = async () => {
     await fetch(`${API_URL}/api/card`, {
@@ -28,7 +27,6 @@ export default function Cards() {
       body: JSON.stringify({ ...form, expMonth: +form.expMonth, expYear: +form.expYear })
     });
     setForm({ holderName: "", cardType: "", last4: "", expMonth: "", expYear: "" });
-    load();
   };
 
   return (

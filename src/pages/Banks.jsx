@@ -7,15 +7,15 @@ export default function Banks() {
   const [form, setForm] = useState({ bankName: "", accountNumber: "", ifsc: "", branch: "" });
   const token = localStorage.getItem("token");
 
-  const load = () => {
+  useEffect(() => {
+    if (!token) return;
+
     fetch(`${API_URL}/api/bank`, {
       headers: { Authorization: "Bearer " + token }
-    }).then(r => r.json()).then(setBanks);
-  };
-
-  useEffect(() => {
-  if (token) load();
-}, [token]);
+    })
+      .then(r => r.json())
+      .then(setBanks);
+  }, [token]);
 
   const submit = async () => {
     await fetch(`${API_URL}/api/bank`, {
@@ -27,7 +27,6 @@ export default function Banks() {
       body: JSON.stringify(form)
     });
     setForm({ bankName: "", accountNumber: "", ifsc: "", branch: "" });
-    load();
   };
 
   return (
